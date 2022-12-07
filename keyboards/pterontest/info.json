@@ -1,11 +1,11 @@
 {
-    "keyboard_name": "Pteron36",
-    "manufacturer": "Harshit Goel",
+    "keyboard_name": "HermitKeebOne",
+    "manufacturer": "cs",
     "url": "",
-    "maintainer": "harshitgoel96",
+    "maintainer": "cs",
     "usb": {
-        "vid": "0x4847",
-        "pid": "0x5054",
+        "vid": "0x0690",
+        "pid": "0x0001",
         "device_version": "0.0.1"
     },
     "layouts": {

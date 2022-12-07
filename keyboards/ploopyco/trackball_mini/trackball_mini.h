@@ -57,5 +57,17 @@ enum ploopy_keycodes {
 #endif
 };
 
+// Enables ploopy trackball firmware acceleration.
+extern bool PloopyAcceleration;
+
+// If set to 1, this causes the trackball to emit scroll events (instead of mouse events) when numlock is enabled.
+// This can be used to give the trackball nano a "scroll mode" and using your keyboard's NumLock to toggle it.
+extern bool PloopyNumlockScroll;
+
+// Determines the vertical scroll direction if PLOOPY_NUMLOCK_SCROLL is enabled.
+// A value of 1 means that moving the trackball UP will result in scrolling DOWN.
+// A value of -1 means that moving the trackball UP will result in scrolling UP.
+extern int16_t PloopyNumlockScrollVDir;
+
 bool encoder_update_user(uint8_t index, bool clockwise);
 bool encoder_update_kb(uint8_t index, bool clockwise);

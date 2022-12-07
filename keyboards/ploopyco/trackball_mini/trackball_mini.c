@@ -30,7 +30,7 @@
 #endif
 
 #ifndef OPT_THRES
-#    define OPT_THRES 150  // (0-1024) 	Threshold for actication
+#    define OPT_THRES 50  // (0-1024) 	Threshold for actication
 #endif
 
 #ifndef OPT_SCALE
@@ -41,7 +41,7 @@
 #    define PLOOPY_DPI_OPTIONS \
         { 375, 750, 1375 }
 #    ifndef PLOOPY_DPI_DEFAULT
-#       define PLOOPY_DPI_DEFAULT 1
+#       define PLOOPY_DPI_DEFAULT 0
 #    endif
 #endif
 #ifndef PLOOPY_DPI_DEFAULT
@@ -63,6 +63,11 @@ uint16_t          dpi_array[] = PLOOPY_DPI_OPTIONS;
 // https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html
 // Compile time accel selection
 // Valid options are ACC_NONE, ACC_LINEAR, ACC_CUSTOM, ACC_QUADRATIC
+
+bool PloopyAcceleration = false;
+bool PloopyNumlockScroll = false;
+int16_t PloopyNumlockScrollVDir = 1;
+bool DoScroll = false;
 
 // Trackball State
 bool     is_scroll_clicked = false;
@@ -127,6 +132,14 @@ void pointing_device_init_kb(void) {
 report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     process_wheel();
 
+    if (PloopyAcceleration) {
+        int16_t x = mouse_report.x;
+        int16_t y = mouse_report.y;
+
+        mouse_report.x = x*x*x/32+x;
+        mouse_report.y = y*y*y/32+y;\
+    }
+    
     if (is_drag_scroll) {
         mouse_report.h = mouse_report.x;
 #ifdef PLOOPY_DRAGSCROLL_INVERT
