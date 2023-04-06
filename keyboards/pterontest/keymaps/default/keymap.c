@@ -20,7 +20,7 @@ bool is_alt_tab_active = false; // ADD this near the begining of keymap.c
 bool is_alt_shift_tab_active = false; // ADD this near the begining of keymap.c
 uint16_t alt_tab_timer = 0;     // we will be using them soon.
 
-const uint16_t PROGMEM keymaps_ROWS][MATRIX_COLS] = {
+const uint16_t PROGMEM keymaps[MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_QWERTY] = LAYOUT_split_4x6_encoder(
 		KC_ESC,	KC_1,	  		KC_2,   		KC_3,   	KC_4,	  KC_5,		                KC_6,	  KC_7,	  KC_8, 	KC_9,	  KC_0,	  KC_F24,
