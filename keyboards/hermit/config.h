@@ -17,34 +17,26 @@
 
 #pragma once
 
+#define EE_HANDS
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 6
 
-/* key matrix size */
-#define MATRIX_ROWS 4
-#define MATRIX_COLS 12
+#define TAPPING_TERM 200
 
-/*
- * Keyboard Matrix Assignments
- *
- * Change this to how you wired your keyboard
- * COLS: AVR pins used for columns, left to right
- * ROWS: AVR pins used for rows, top to bottom
- * DIODE_DIRECTION: COL2ROW = COL = Anode (+), ROW = Cathode (-, marked on diode)
- *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
- *
- */
-#define MATRIX_ROW_PINS \
-    { D4, D1, D0, D5 }
-#define MATRIX_COL_PINS \
-    { B3, B4, B5, B0, D7, D6 }
+#define PERMISSIVE_HOLD
 
-#define SECONDARY_ROW_PINS \
-    { (1 << 5), (1 << 6), (1 << 7), (1 << 4) }
-#define SECONDARY_COL_PINS \
-    { (1 << 3), (1 << 2), (1 << 1), (1 << 0), (1 << 15), (1 << 14) }
-
-/* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION COL2ROW
+#define IGNORE_MOD_TAP_INTERRUPT
 
-#define USB_MAX_POWER_CONSUMPTION 100
+#define MATRIX_ROW_PINS { D4, C6, D7, E6, B6}
+#define MATRIX_COL_PINS { F4, F5, F6, F7, B1, B3 }
 
-#define OLED_TIMEOUT 60000
+#define USE_SERIAL
+#define SOFT_SERIAL_PIN D2
+#define DEBOUNCE 5
+#define LOCKING_SUPPORT_ENABLE
+#define LOCKING_RESYNC_ENABLE
+#define DYNAMIC_KEYMAP_LAYER_COUNT 7
+#define ENCODERS_PAD_A { B5 }
+#define ENCODERS_PAD_B { B4 }
+

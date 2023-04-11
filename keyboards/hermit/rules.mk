@@ -18,6 +18,5 @@ OLED_ENABLE = no
 WPM_ENABLE = yes
 #CUSTOM_MATRIX = lite
 
-SRC += hermit_encoder.c
-
-QUANTUM_LIB_SRC += i2c_master.c
+SPLIT_KEYBOARD = yes        # Split enable
+CAPS_WORD_ENABLE = yes

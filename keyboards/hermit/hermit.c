@@ -16,23 +16,3 @@
  */
 #include "hermit.h"
 
-void matrix_init_kb(void) {
-    // put your keyboard start-up code here
-    // runs once when the firmware starts up
-    i2c_init();
-
-    matrix_init_user();
-}
-
-void matrix_scan_kb(void) {
-    // put your looping keyboard code here
-    // runs every cycle (a lot)
-    //if (mcp23018_reset_required()) {
-    //    msp23018_init();
-    //    secondary_encoder_init();
-        // hermit_set_led(2, 1);
-    //}
-
-    matrix_scan_user();
-    secondary_encoder_read();
-}

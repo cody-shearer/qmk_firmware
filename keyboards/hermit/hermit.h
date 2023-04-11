@@ -19,23 +19,40 @@
 
 #include "quantum.h"
 
-#define ___ KC_NO
-
-// clang-format off
-#define LAYOUT_split_3x6_4( \
-	k00, k01, k02, k03, k04, k05,   k06, k07, k08, k09, k0a, k0b, \
-	k10, k11, k12, k13, k14, k15,   k16, k17, k18, k19, k1a, k1b, \
-	k20, k21, k22, k23, k24, k25,   k26, k27, k28, k29, k2a, k2b, \
-	          k32, k33, k34, k35,   k36, k37, k38, k39 \
-) { \
-	{ k00, k01, k02, k03, k04, k05,   k06, k07, k08, k09, k0a, k0b }, \
-	{ k10, k11, k12, k13, k14, k15,   k16, k17, k18, k19, k1a, k1b }, \
-	{ k20, k21, k22, k23, k24, k25,   k26, k27, k28, k29, k2a, k2b }, \
-	{ ___, ___, k32, k33, k34, k35,   k36, k37, k38, k39, ___, ___ } \
+#define LAYOUT_split_4x6( \
+	L00,	L01,	L02,	L03,	L04,	L05,				R05,	R04,	R03,	R02,	R01,	R00,\
+	L10,	L11,	L12,	L13,	L14,	L15,				R15,	R14,	R13,	R12,	R11,	R10,\
+	L20,	L21,	L22,	L23,	L24,	L25,				R25,	R24,	R23,	R22,	R21,	R20, \
+	L30,	L31,	L32,	L33,	L34,	L35,				R35,	R34,	R33,	R32,	R31,	R30, \
+							L40,	L41,	L42,				R42,	R41, 	R40\
+) {\
+	{	L00,	L01,	L02,	L03,	L04,	L05},\
+	{	L10,	L11,	L12,	L13,	L14,	L15},\
+	{	L20,	L21,	L22,	L23,	L24,	L25},\
+	{	L30,	L31,	L32,	L33,	L34,	L35},\
+	{	L40,	L41,	L42,	KC_NO,KC_NO,KC_NO},\
+	{	R00,	R01,	R02,	R03,	R04,	R05},\
+	{	R10,	R11,	R12,	R13,	R14,	R15},\
+	{	R20,	R21,	R22,	R23,	R24,	R25},\
+	{	R30,	R31,	R32,	R33,	R34,	R35},\
+	{	R40,	R41,	R42,	KC_NO,KC_NO,KC_NO}\
 }
-// clang-format on
 
-void hermit_set_led(uint8_t led, bool on);
-
-void secondary_encoder_read(void);
-void secondary_encoder_init(void);
+#define LAYOUT_split_4x6_encoder( \
+	L00,	L01,	L02,	L03,	L04,	L05,								R05,	R04,	R03,	R02,	R01,	R00,\
+	L10,	L11,	L12,	L13,	L14,	L15,								R15,	R14,	R13,	R12,	R11,	R10,\
+	L20,	L21,	L22,	L23,	L24,	L25,								R25,	R24,	R23,	R22,	R21,	R20, \
+	L30,	L31,	L32,	L33,	L34,	L35,	L36,		R36,	R35,	R34,	R33,	R32,	R31,	R30, \
+							L40,	L41,	L42,								R42,	R41, 	R40\
+) {\
+	{	L00,	L01,	L02,	L03,	L04,	L05},\
+	{	L10,	L11,	L12,	L13,	L14,	L15},\
+	{	L20,	L21,	L22,	L23,	L24,	L25},\
+	{	L30,	L31,	L32,	L33,	L34,	L35},\
+	{	L36,	L40,	L41,	L42,	KC_NO,KC_NO},\
+	{	R00,	R01,	R02,	R03,	R04,	R05},\
+	{	R10,	R11,	R12,	R13,	R14,	R15},\
+	{	R20,	R21,	R22,	R23,	R24,	R25},\
+	{	R30,	R31,	R32,	R33,	R34,	R35},\
+	{	R36,	R42,	R41,	R40,	KC_NO,KC_NO}\
+}
