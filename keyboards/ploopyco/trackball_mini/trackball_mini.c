@@ -136,9 +136,12 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     if (PloopyAcceleration) {
         int16_t x = mouse_report.x;
         int16_t y = mouse_report.y;
+        int16_t accel_factor = 1.5;
+        int16_t low_speed_adjustment = 3.5;
 
-        mouse_report.x = x*x*x/32+x;
-        mouse_report.y = y*y*y/32+y;\
+        mouse_report.x = x*x*x*accel_factor+x/low_speed_adjustment;
+        mouse_report.y = y*y*y*accel_factor+y/low_speed_adjustment;
+
     }
     
     if (is_drag_scroll) {
