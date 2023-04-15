@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <math.h>
 #include "trackball_mini.h"
 #include "wait.h"
 #include "debug.h"
@@ -134,13 +135,29 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     process_wheel();
 
     if (PloopyAcceleration) {
+
         int16_t x = mouse_report.x;
         int16_t y = mouse_report.y;
-        int16_t accel_factor = 1.5;
-        int16_t low_speed_adjustment = 3.5;
+        float high_speed_adjust = 0.75f;
+        float low_speed_adjust = 0.25f;
 
-        mouse_report.x = x*x*x*accel_factor+x/low_speed_adjustment;
-        mouse_report.y = y*y*y*accel_factor+y/low_speed_adjustment;
+        // Calculate the vector magnitude (length)
+        float magnitude = sqrtf(x * x + y * y);
+
+        if (magnitude > 0) {
+            // Normalize the vector by dividing each component by the magnitude
+            float normalized_x = x / magnitude;
+            float normalized_y = y / magnitude;
+
+            // Apply acceleration and low-speed adjustment
+            float adjusted_magnitude = 
+                high_speed_adjust * magnitude * magnitude * magnitude +
+                low_speed_adjust * magnitude;
+
+            // Scale the normalized vector by the adjusted magnitude
+            mouse_report.x = (int16_t)(normalized_x * adjusted_magnitude);
+            mouse_report.y = (int16_t)(normalized_y * adjusted_magnitude);
+        }
 
     }
     
