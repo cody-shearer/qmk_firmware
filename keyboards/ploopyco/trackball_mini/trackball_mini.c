@@ -135,30 +135,16 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     process_wheel();
 
     if (PloopyAcceleration) {
-
-        int16_t x = mouse_report.x;
-        int16_t y = mouse_report.y;
-        float high_speed_adjust = 0.75f;
-        float low_speed_adjust = 0.25f;
-
         // Calculate the vector magnitude (length)
-        float magnitude = sqrtf(x * x + y * y);
+        float magnitude = sqrtf(
+                mouse_report.x * mouse_report.x + 
+                mouse_report.y * mouse_report.y
+        );
 
-        if (magnitude > 0) {
-            // Normalize the vector by dividing each component by the magnitude
-            float normalized_x = x / magnitude;
-            float normalized_y = y / magnitude;
+        float adjusted_magnitude = powf(magnitude, 1.2f);
 
-            // Apply acceleration and low-speed adjustment
-            float adjusted_magnitude = 
-                high_speed_adjust * magnitude * magnitude * magnitude +
-                low_speed_adjust * magnitude;
-
-            // Scale the normalized vector by the adjusted magnitude
-            mouse_report.x = (int16_t)(normalized_x * adjusted_magnitude);
-            mouse_report.y = (int16_t)(normalized_y * adjusted_magnitude);
-        }
-
+        mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
+        mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);
     }
     
     if (is_drag_scroll) {
