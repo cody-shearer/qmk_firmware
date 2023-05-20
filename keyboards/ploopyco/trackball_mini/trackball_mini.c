@@ -136,15 +136,18 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
 
     if (PloopyAcceleration) {
         // Calculate the vector magnitude (length)
-        float magnitude = sqrtf(
-                mouse_report.x * mouse_report.x + 
-                mouse_report.y * mouse_report.y
-        );
 
-        float adjusted_magnitude = powf(magnitude, 1.2f);
+I'm using the following block of code in trackball_mini.c in the function report_mouse_t pointing_device_task_kb
 
-        mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
-        mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);
+float magnitude = sqrtf(
+        mouse_report.x * mouse_report.x + 
+        mouse_report.y * mouse_report.y
+);
+
+float adjusted_magnitude = powf(magnitude, 1.2f);
+
+mouse_report.x = (int16_t)(mouse_report.x * adjusted_magnitude);
+mouse_report.y = (int16_t)(mouse_report.y * adjusted_magnitude);
     }
     
     if (is_drag_scroll) {
